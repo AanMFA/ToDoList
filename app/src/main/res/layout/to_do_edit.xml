@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/input_judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:hint="Judul To Do"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"></EditText>
+
+        <ImageButton
+            android:id="@+id/btSaveDetail"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="69dp"
+            android:layout_marginLeft="69dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toStartOf="@+id/btCancelEdit"
+            android:layout_toLeftOf="@+id/btCancelEdit"
+            android:background="@android:color/transparent"
+            app:srcCompat="@android:drawable/ic_menu_save" />
+
+        <ImageButton
+            android:id="@+id/btCancelEdit"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@android:drawable/ic_delete" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/input_deskripsi_to_do"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Deskripsi To Do"
+        android:textSize="24sp"
+        android:gravity="top|left">
+
+    </EditText>
+</LinearLayout>

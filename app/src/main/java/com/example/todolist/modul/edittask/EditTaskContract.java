@@ -11,7 +11,7 @@ import com.example.todolist.data.model.Task;
 
 public interface EditTaskContract {
     interface View extends BaseView<Presenter> {
-        void redirectToEditTask();
+        void redirectToDetailTask();
         void showData(Task task);
         void setId(String id);
     }

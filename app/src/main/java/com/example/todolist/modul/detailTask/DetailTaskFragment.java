@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.example.todolist.R;
 import com.example.todolist.base.BaseFragment;
+import com.example.todolist.data.local.TaskTableHandler;
 import com.example.todolist.data.model.Task;
 import com.example.todolist.modul.edittask.EditTaskActivity;
 import com.example.todolist.modul.todolist.TodoListActivity;
@@ -37,7 +38,7 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_detail, container, false);
-        mPresenter = new DetailTaskPresenter(this);
+        mPresenter = new DetailTaskPresenter(this, new TaskTableHandler(getActivity()));
         mPresenter.start();
 
         tvTaskTitle = fragmentView.findViewById(R.id.tvToDoTitle);
@@ -49,11 +50,28 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
                 setBtEditClick();
             }
         });
+        FloatingActionButton btDelete = fragmentView.findViewById(R.id.btDeleteToDo);
+        btDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setBtDeleteClick();
+            }
+        });
 
         setTitle("Task Detail");
         mPresenter.loadData(this.id);
 
         return fragmentView;
+    }
+
+    private void setBtDeleteClick() {
+        mPresenter.deleteData(id);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.loadData(this.id);
     }
 
     public void setBtEditClick(){

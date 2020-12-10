@@ -1,6 +1,7 @@
 package com.example.todolist.modul.edittask;
 
 
+import com.example.todolist.data.local.TableHandler;
 import com.example.todolist.data.model.Task;
 
 /**
@@ -9,9 +10,12 @@ import com.example.todolist.data.model.Task;
 
 public class EditTaskPresenter implements EditTaskContract.Presenter{
     private final EditTaskContract.View view;
+    private final TableHandler tableHandler;
+    Task editedTask;
 
-    public EditTaskPresenter(EditTaskContract.View view) {
+    public EditTaskPresenter(EditTaskContract.View view, TableHandler tableHandler) {
         this.view = view;
+        this.tableHandler = tableHandler;
     }
 
     @Override
@@ -20,18 +24,21 @@ public class EditTaskPresenter implements EditTaskContract.Presenter{
 
     @Override
     public void saveData(final String title, final String description){
-        Task newTask = new Task("3", title, description);
-        //save new task
+        editedTask.setTitle(title);
+        editedTask.setDescription(description);
+
+        tableHandler.update(editedTask);
         //then go back to task list
-        view.redirectToEditTask();
+        view.redirectToDetailTask();
     }
 
     @Override
     public void loadData(String id) {
         //load data task by id
         //then send data to fragment
-        Task task = new Task("3", "title of taskIndex:"+id, "description of taskIndex:"+id);
-        view.showData(task);
+
+        editedTask = (Task) tableHandler.readById(id);
+        view.showData(editedTask);
     }
 
 }

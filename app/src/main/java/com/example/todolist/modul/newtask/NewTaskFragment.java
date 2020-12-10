@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.example.todolist.R;
 import com.example.todolist.base.BaseFragment;
+import com.example.todolist.data.local.TaskTableHandler;
 import com.example.todolist.modul.todolist.TodoListActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,7 +35,7 @@ public class NewTaskFragment extends BaseFragment<NewTaskActivity, NewTaskContra
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_edit, container, false);
-        mPresenter = new NewTaskPresenter(this);
+        mPresenter = new NewTaskPresenter(this, new TaskTableHandler(getActivity()));
         mPresenter.start();
 
         etTaskTitle = fragmentView.findViewById(R.id.etTaskTitle);

@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 public interface TodoListContract {
     interface View extends BaseView<Presenter> {
-        void gotoNewTask();
+        void goToNewTask();
+        void goToTaskDetail(String id);
     }
 
     interface Presenter extends BasePresenter {

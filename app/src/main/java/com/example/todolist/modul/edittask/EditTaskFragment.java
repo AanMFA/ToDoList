@@ -1,6 +1,5 @@
 package com.example.todolist.modul.edittask;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,8 @@ import androidx.annotation.Nullable;
 
 import com.example.todolist.R;
 import com.example.todolist.base.BaseFragment;
+import com.example.todolist.data.local.TaskTableHandler;
 import com.example.todolist.data.model.Task;
-import com.example.todolist.modul.todolist.TodoListActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -36,7 +35,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         fragmentView = inflater.inflate(R.layout.fragment_edit, container, false);
-        mPresenter = new EditTaskPresenter(this);
+        mPresenter = new EditTaskPresenter(this, new TaskTableHandler(getActivity()));
         mPresenter.start();
 
         etTaskTitle = fragmentView.findViewById(R.id.etTaskTitle);
@@ -67,7 +66,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
     }
 
     @Override
-    public void redirectToEditTask() {
+    public void redirectToDetailTask() {
             activity.finish();
     }
 

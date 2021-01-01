@@ -13,7 +13,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + DatabaseContract.FeedTask.TABLE_NAME + " (" +
                     DatabaseContract.FeedTask._ID + " INTEGER PRIMARY KEY," +
                     DatabaseContract.FeedTask.COLUMN_TITLE + " TEXT," +
-                    DatabaseContract.FeedTask.COLUMN_DESCRIPTION + " TEXT)";
+                    DatabaseContract.FeedTask.COLUMN_DESCRIPTION + " TEXT," +
+                    DatabaseContract.FeedTask.COLUMN_IS_CHECKED + " INTEGER)";
 
     private static final String SQL_DELETE_TASK =
             "DROP TABLE IF EXISTS " + DatabaseContract.FeedTask.TABLE_NAME;

@@ -38,7 +38,8 @@ public class TaskTableHandler implements TableHandler<Task>{
         String[] projection = {
                 DatabaseContract.FeedTask._ID,
                 DatabaseContract.FeedTask.COLUMN_TITLE,
-                DatabaseContract.FeedTask.COLUMN_DESCRIPTION
+                DatabaseContract.FeedTask.COLUMN_DESCRIPTION,
+                DatabaseContract.FeedTask.COLUMN_IS_CHECKED
         };
 
         // Filter results WHERE "id" = id
@@ -66,7 +67,8 @@ public class TaskTableHandler implements TableHandler<Task>{
                 cursor.getLong(
                         cursor.getColumnIndexOrThrow(DatabaseContract.FeedTask._ID))+"",
                 cursor.getString(1),//title
-                cursor.getString(2));//description
+                cursor.getString(2),//description
+                cursor.getInt(3) >= 1); //isChecked
 
         return task;
     }
@@ -86,7 +88,8 @@ public class TaskTableHandler implements TableHandler<Task>{
                         cursor.getLong(
                                 cursor.getColumnIndexOrThrow(DatabaseContract.FeedTask._ID))+"",
                         cursor.getString(1),//title
-                        cursor.getString(2));//description
+                        cursor.getString(2),//description
+                        cursor.getInt(3) >= 1); //isChecked
 
                 taskList.add(task);
             } while (cursor.moveToNext());
@@ -104,6 +107,7 @@ public class TaskTableHandler implements TableHandler<Task>{
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.FeedTask.COLUMN_TITLE, task.getTitle());
         values.put(DatabaseContract.FeedTask.COLUMN_DESCRIPTION, task.getDescription());
+        values.put(DatabaseContract.FeedTask.COLUMN_IS_CHECKED, task.isChecked());
 
         // Which row to update, based on the title
         String selection = DatabaseContract.FeedTask._ID + " LIKE ?";

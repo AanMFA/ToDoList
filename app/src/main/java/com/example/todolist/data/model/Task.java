@@ -6,11 +6,17 @@ public class Task extends BaseModel {
     private String id;
     private String title;
     private String description;
+    private boolean isChecked;
 
     public Task(String id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
+    }
+
+    public Task(String id, String title, String description, boolean isChecked) {
+        this(id, title, description);
+        this.isChecked = isChecked;
     }
 
     public String getId() {
@@ -35,5 +41,13 @@ public class Task extends BaseModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

@@ -1,13 +1,18 @@
 package com.example.todolist.utils;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todolist.R;
+import com.example.todolist.data.local.TaskTableHandler;
 import com.example.todolist.data.model.Task;
 
 import java.util.ArrayList;
@@ -18,12 +23,15 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
     private static MyClickListener myClickListener;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView tvTitle;
+        final TextView tvTitle;
         TextView tvDescription;
+        CheckBox checkBox;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitleTask);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescriptionTask);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
             itemView.setOnClickListener(this);
         }
 
@@ -47,8 +55,22 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        final int pos = position;
+        final Context context = holder.checkBox.getContext();
+
         holder.tvTitle.setText(mDataset.get(position).getTitle());
         holder.tvDescription.setText(mDataset.get(position).getDescription());
+        holder.checkBox.setChecked(mDataset.get(position).isChecked());
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Task selectedTask = mDataset.get(pos);
+
+                selectedTask.setChecked(b);
+                Log.d("Checked", String.valueOf(selectedTask.isChecked()));
+                new TaskTableHandler(context).update(selectedTask);
+            }
+        });
     }
 
     @Override
@@ -59,6 +81,7 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
     public void setOnItemClickListener(MyClickListener myClickListener) {
         this.myClickListener = myClickListener;
     }
+
     public interface MyClickListener {
         public void onItemClick(int position, View v);
     }

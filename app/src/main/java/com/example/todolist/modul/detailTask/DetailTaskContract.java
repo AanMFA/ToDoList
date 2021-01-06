@@ -19,7 +19,7 @@ public interface DetailTaskContract {
 
     interface Presenter extends BasePresenter {
         void loadData(String id);
-
         void deleteData(String id);
+        void shareTask(String userEmail, String id);
     }
 }

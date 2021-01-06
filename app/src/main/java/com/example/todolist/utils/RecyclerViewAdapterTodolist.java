@@ -86,4 +86,7 @@ public class RecyclerViewAdapterTodolist extends RecyclerView.Adapter<RecyclerVi
         public void onItemClick(int position, View v);
     }
 
+    public void setmDataset(ArrayList<Task> myDataset){
+        mDataset = myDataset;
+    }
 }

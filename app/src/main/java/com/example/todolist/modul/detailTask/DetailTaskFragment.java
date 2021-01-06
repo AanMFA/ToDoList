@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,6 +15,8 @@ import com.example.todolist.data.local.TaskTableHandler;
 import com.example.todolist.data.model.Task;
 import com.example.todolist.modul.edittask.EditTaskActivity;
 import com.example.todolist.modul.todolist.TodoListActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -50,13 +51,8 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
                 setBtEditClick();
             }
         });
-        FloatingActionButton btDelete = fragmentView.findViewById(R.id.btDeleteToDo);
-        btDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBtDeleteClick();
-            }
-        });
+        setBtDeleteClick();
+        setBtShareClick();
 
         setTitle("Task Detail");
         mPresenter.loadData(this.id);
@@ -64,8 +60,27 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
         return fragmentView;
     }
 
+    private void setBtShareClick() {
+        FloatingActionButton btShare = fragmentView.findViewById(R.id.btShareToDo);
+        final GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        btShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.shareTask(account.getEmail(), id);
+            }
+        });
+
+    }
+
     private void setBtDeleteClick() {
-        mPresenter.deleteData(id);
+        FloatingActionButton btDelete = fragmentView.findViewById(R.id.btDeleteToDo);
+        btDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.deleteData(id);
+            }
+        });
+
     }
 
     @Override

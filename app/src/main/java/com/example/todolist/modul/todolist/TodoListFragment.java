@@ -17,11 +17,11 @@ import com.example.todolist.data.local.TaskTableHandler;
 import com.example.todolist.data.model.Task;
 import com.example.todolist.modul.detailTask.DetailTaskActivity;
 import com.example.todolist.modul.newtask.NewTaskActivity;
+import com.example.todolist.modul.sharedlist.SharedListActivity;
 import com.example.todolist.utils.RecyclerViewAdapterTodolist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-
 
 /**
  * Created by fahrul on 13/03/19.
@@ -60,9 +60,19 @@ public class TodoListFragment extends BaseFragment<TodoListActivity, TodoListCon
                 goToNewTask();
             }
         });
-
+        setBtShareOnClick();
 
         return fragmentView;
+    }
+
+    private void setBtShareOnClick() {
+        FloatingActionButton button = fragmentView.findViewById(R.id.btSharedWithYou);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSharedList();
+            }
+        });
     }
 
     @Override
@@ -105,6 +115,9 @@ public class TodoListFragment extends BaseFragment<TodoListActivity, TodoListCon
         startActivity(intent);
     }
 
-
-
+    @Override
+    public void goToSharedList(){
+        Intent intent = new Intent(activity, SharedListActivity.class);
+        startActivity(intent);
+    }
 }

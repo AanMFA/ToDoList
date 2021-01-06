@@ -20,6 +20,8 @@
         <activity android:name=".modul.edittask.EditTaskActivity" />
         <activity android:name=".modul.newtask.NewTaskActivity" />
         <activity android:name=".modul.detailTask.DetailTaskActivity" />
+        <activity android:name=".modul.detailsharedtask.DetailSharedTaskActivity" />
+        <activity android:name=".modul.sharedlist.SharedListActivity" />
     </application>
 
 </manifest>

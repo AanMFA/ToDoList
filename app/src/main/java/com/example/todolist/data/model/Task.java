@@ -1,8 +1,6 @@
 package com.example.todolist.data.model;
 
-import com.example.todolist.base.BaseModel;
-
-public class Task extends BaseModel {
+public class Task{
     private String id;
     private String title;
     private String description;
@@ -12,6 +10,10 @@ public class Task extends BaseModel {
         this.id = id;
         this.title = title;
         this.description = description;
+    }
+
+    public Task(){
+
     }
 
     public Task(String id, String title, String description, boolean isChecked) {

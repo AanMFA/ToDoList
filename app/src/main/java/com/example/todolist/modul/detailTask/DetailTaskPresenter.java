@@ -41,7 +41,7 @@ public class DetailTaskPresenter implements DetailTaskContract.Presenter{
     }
 
     @Override
-    public void shareTask(String userEmail, String id) {
+    public void shareTaskOnline(String userEmail, String id) {
         Task task = (Task) tableHandler.readById(id);
         final RequestTask sentTask = new RequestTask(task, userEmail);
 
@@ -54,5 +54,12 @@ public class DetailTaskPresenter implements DetailTaskContract.Presenter{
                         Log.d("Firebase", "share task" + sentTask.isChecked());
                     }
                 });
+    }
+
+    @Override
+    public void shareTaskToAnotherDevice(String id) {
+        Task task = (Task) tableHandler.readById(id);
+
+        view.shareTaskToAnotherDevice(task);
     }
 }

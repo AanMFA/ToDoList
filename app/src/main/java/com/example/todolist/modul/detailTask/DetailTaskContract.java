@@ -15,11 +15,13 @@ public interface DetailTaskContract {
         void redirectToEditList();
         void showData(Task task);
         void setId(String id);
+        void shareTaskToAnotherDevice(Task task);
     }
 
     interface Presenter extends BasePresenter {
         void loadData(String id);
         void deleteData(String id);
-        void shareTask(String userEmail, String id);
+        void shareTaskOnline(String userEmail, String id);
+        void shareTaskToAnotherDevice(String id);
     }
 }

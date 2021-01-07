@@ -17,6 +17,7 @@ import com.example.todolist.modul.edittask.EditTaskActivity;
 import com.example.todolist.modul.todolist.TodoListActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.internal.TaskUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -53,11 +54,22 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
         });
         setBtDeleteClick();
         setBtShareClick();
+        setBtShareToDevicesClick();
 
         setTitle("Task Detail");
         mPresenter.loadData(this.id);
 
         return fragmentView;
+    }
+
+    private void setBtShareToDevicesClick() {
+        FloatingActionButton btShare = fragmentView.findViewById(R.id.btShareToDevices);
+        btShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.shareTaskToAnotherDevice(id);
+            }
+        });
     }
 
     private void setBtShareClick() {
@@ -66,7 +78,7 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
         btShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.shareTask(account.getEmail(), id);
+                mPresenter.shareTaskOnline(account.getEmail(), id);
             }
         });
 
@@ -123,5 +135,14 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
         startActivity(intent);
     }
 
+    @Override
+    public void shareTaskToAnotherDevice(Task task) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, task.toString());
+        sendIntent.setType("text/plain");
 
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.todolist.data.model;
 
+import androidx.annotation.NonNull;
+
 public class Task{
     private String id;
     private String title;
@@ -51,5 +53,14 @@ public class Task{
 
     public void setChecked(boolean checked) {
         isChecked = checked;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Todo List Task\n" +
+                "Title : " + title + "\n" +
+                "Description : " + description + "\n" +
+                "Status : " + (isChecked ? "" : "not ") + "finished";
     }
 }

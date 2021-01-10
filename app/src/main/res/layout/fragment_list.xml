@@ -21,20 +21,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="@dimen/floating_button_margin"
+        android:layout_marginRight="@dimen/floating_button_margin"
+        android:layout_marginBottom="@dimen/floating_button_margin"
         android:clickable="true"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btSharedWithYou"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:clickable="true"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:focusable="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_baseline_add_24" />
 </RelativeLayout>

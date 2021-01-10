@@ -29,5 +29,7 @@ public abstract class BaseFragmentHolderActivity extends BaseActivity {
         this.tvToolbarTitle.setText(title);
     }
 
-
+    public void setMenuOnClick(View.OnClickListener onclick){
+        overflowMenu.setOnClickListener(onclick);
+    }
 }

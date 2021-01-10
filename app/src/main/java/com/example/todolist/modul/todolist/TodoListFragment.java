@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,7 +30,6 @@ import java.util.ArrayList;
  */
 
 public class TodoListFragment extends BaseFragment<TodoListActivity, TodoListContract.Presenter> implements TodoListContract.View {
-
     RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -61,6 +62,7 @@ public class TodoListFragment extends BaseFragment<TodoListActivity, TodoListCon
             }
         });
         setBtShareOnClick();
+        bindMenuButtonListener();
 
         return fragmentView;
     }
@@ -119,5 +121,40 @@ public class TodoListFragment extends BaseFragment<TodoListActivity, TodoListCon
     public void goToSharedList(){
         Intent intent = new Intent(activity, SharedListActivity.class);
         startActivity(intent);
+    }
+
+    private void bindMenuButtonListener() {
+        View.OnClickListener onclick = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopup(view);
+            }
+        };
+
+        activity.setMenuOnClick(onclick);
+    }
+
+    private void showPopup(View view) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+
+        popupMenu.getMenuInflater().inflate(R.menu.todolist_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                menuAction(menuItem.getItemId());
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void menuAction(int viewId){
+        switch (viewId){
+            case R.id.sharedTask:
+                goToSharedList();
+                break;
+            default:
+                break;
+        }
     }
 }

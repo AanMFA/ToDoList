@@ -12,9 +12,7 @@ public class DetailTaskActivity extends BaseFragmentHolderActivity {
     @Override
     protected void initializeFragment() {
         initializeView();
-
-//        ivIcon.setImageResource(R.drawable.....);
-        ivIcon.setVisibility(View.VISIBLE);
+        overflowMenu.setVisibility(View.VISIBLE);
 
         detailTaskFragment = new DetailTaskFragment();
         String id = getIntent().getExtras().getString("TaskId");

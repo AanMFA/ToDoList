@@ -10,9 +10,7 @@ public class SharedListActivity extends BaseFragmentHolderActivity {
     @Override
     protected void initializeFragment() {
         initializeView();
-
-//        ivIcon.setImageResource(R.drawable.....);
-        ivIcon.setVisibility(View.VISIBLE);
+        overflowMenu.setVisibility(View.GONE);
 
         sharedListFragment = new SharedListFragment();
         setCurrentFragment(sharedListFragment, false);

@@ -12,9 +12,7 @@ public class DetailSharedTaskActivity extends BaseFragmentHolderActivity {
     @Override
     protected void initializeFragment() {
         initializeView();
-
-//        ivIcon.setImageResource(R.drawable.....);
-        ivIcon.setVisibility(View.VISIBLE);
+        overflowMenu.setVisibility(View.GONE);
 
         int indeks = getIntent().getExtras().getInt("Task Indeks");
         detailSharedTaskFragment = new DetailSharedTaskFragment(indeks);

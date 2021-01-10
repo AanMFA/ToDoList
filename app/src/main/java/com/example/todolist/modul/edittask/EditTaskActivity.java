@@ -12,14 +12,11 @@ public class EditTaskActivity extends BaseFragmentHolderActivity {
     @Override
     protected void initializeFragment() {
         initializeView();
-
-//        ivIcon.setImageResource(R.drawable.....);
-        ivIcon.setVisibility(View.VISIBLE);
+        overflowMenu.setVisibility(View.GONE);
 
         editTaskFragment = new EditTaskFragment();
         String id = getIntent().getExtras().getString("TaskId");
         editTaskFragment.setId(id);
         setCurrentFragment(editTaskFragment, false);
-
     }
 }

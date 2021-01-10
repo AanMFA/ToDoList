@@ -12,13 +12,10 @@ public class TodoListActivity extends BaseFragmentHolderActivity {
     @Override
     protected void initializeFragment() {
         initializeView();
-
-//        ivIcon.setImageResource(R.drawable.....);
-        ivIcon.setVisibility(View.VISIBLE);
+        overflowMenu.setVisibility(View.GONE);
 
         todoListFragment = new TodoListFragment();
         setCurrentFragment(todoListFragment, false);
-
     }
 
 

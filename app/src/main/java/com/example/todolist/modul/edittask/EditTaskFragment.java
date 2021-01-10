@@ -20,12 +20,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
  */
 
 public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskContract.Presenter> implements EditTaskContract.View {
-
     EditText etTaskTitle;
     EditText etTaskDescription;
     FloatingActionButton btnSave;
     String id;
-
 
     public EditTaskFragment() {
     }
@@ -48,7 +46,7 @@ public class EditTaskFragment extends BaseFragment<EditTaskActivity, EditTaskCon
             }
         });
 
-        setTitle("Add New Task");
+        setTitle("Edit Task");
         mPresenter.loadData(this.id);
 
         return fragmentView;

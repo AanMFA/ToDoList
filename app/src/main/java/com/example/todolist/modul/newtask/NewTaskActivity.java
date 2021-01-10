@@ -12,15 +12,9 @@ public class NewTaskActivity extends BaseFragmentHolderActivity {
     @Override
     protected void initializeFragment() {
         initializeView();
-//        ivIcon.setImageResource(R.drawable.....);
-        ivIcon.setVisibility(View.VISIBLE);
+        overflowMenu.setVisibility(View.GONE);
 
         newTaskFragment = new NewTaskFragment();
         setCurrentFragment(newTaskFragment, false);
-
     }
-
-
-
-
 }

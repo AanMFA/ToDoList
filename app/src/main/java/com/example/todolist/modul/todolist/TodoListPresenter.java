@@ -1,8 +1,11 @@
 package com.example.todolist.modul.todolist;
 
+import androidx.annotation.NonNull;
+
 import com.example.todolist.data.local.TableHandler;
 import com.example.todolist.data.model.Task;
-import com.example.todolist.data.source.SessionRepository;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 
 import java.util.ArrayList;
 
@@ -30,4 +33,14 @@ public class TodoListPresenter implements TodoListContract.Presenter{
         return data;
     }
 
+    @Override
+    public void logout(GoogleSignInClient mGoogleSignInClient) {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                        view.goToLogin();
+                    }
+                });
+    }
 }

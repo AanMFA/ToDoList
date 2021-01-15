@@ -18,9 +18,13 @@ import com.example.todolist.base.BaseFragment;
 import com.example.todolist.data.local.TaskTableHandler;
 import com.example.todolist.data.model.Task;
 import com.example.todolist.modul.detailTask.DetailTaskActivity;
+import com.example.todolist.modul.login.LoginActivity;
 import com.example.todolist.modul.newtask.NewTaskActivity;
 import com.example.todolist.modul.sharedlist.SharedListActivity;
 import com.example.todolist.utils.RecyclerViewAdapterTodolist;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -61,20 +65,9 @@ public class TodoListFragment extends BaseFragment<TodoListActivity, TodoListCon
                 goToNewTask();
             }
         });
-        setBtShareOnClick();
         bindMenuButtonListener();
 
         return fragmentView;
-    }
-
-    private void setBtShareOnClick() {
-        FloatingActionButton button = fragmentView.findViewById(R.id.btSharedWithYou);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToSharedList();
-            }
-        });
     }
 
     @Override
@@ -153,8 +146,27 @@ public class TodoListFragment extends BaseFragment<TodoListActivity, TodoListCon
             case R.id.sharedTask:
                 goToSharedList();
                 break;
+            case R.id.menuLogout:
+                logout();
+                break;
             default:
                 break;
         }
+    }
+
+    private void logout(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
+
+        mPresenter.logout(mGoogleSignInClient);
+    }
+
+    @Override
+    public void goToLogin() {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        startActivity(intent);
+        activity.finish();
     }
 }

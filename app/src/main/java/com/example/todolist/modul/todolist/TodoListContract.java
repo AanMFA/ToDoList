@@ -3,6 +3,7 @@ package com.example.todolist.modul.todolist;
 import com.example.todolist.base.BasePresenter;
 import com.example.todolist.base.BaseView;
 import com.example.todolist.data.model.Task;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import java.util.ArrayList;
 
@@ -15,9 +16,11 @@ public interface TodoListContract {
         void goToNewTask();
         void goToTaskDetail(String id);
         void goToSharedList();
+        void goToLogin();
     }
 
     interface Presenter extends BasePresenter {
         ArrayList<Task> getDataSet();
+        void logout(GoogleSignInClient mGoogleSignInClient);
     }
 }

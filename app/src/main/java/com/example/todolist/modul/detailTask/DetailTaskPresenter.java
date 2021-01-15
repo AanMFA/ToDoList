@@ -54,6 +54,7 @@ public class DetailTaskPresenter implements DetailTaskContract.Presenter{
                         Log.d("Firebase", "share task" + sentTask.isChecked());
                     }
                 });
+        view.showToast("Share Task Berhasil");
     }
 
     @Override

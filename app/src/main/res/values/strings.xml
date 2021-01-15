@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shared_task">Shared Task</string>
     <string name="logout">Logout</string>
+    <string name="delete_task">Delete Task</string>
+    <string name="share_online">Share Online</string>
+    <string name="share_to">Share To...</string>
 </resources>

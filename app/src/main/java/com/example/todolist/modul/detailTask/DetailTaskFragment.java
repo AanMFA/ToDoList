@@ -3,9 +3,12 @@ package com.example.todolist.modul.detailTask;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -52,47 +55,12 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
                 setBtEditClick();
             }
         });
-        setBtDeleteClick();
-        setBtShareClick();
-        setBtShareToDevicesClick();
+        bindMenuButtonListener();
 
         setTitle("Task Detail");
         mPresenter.loadData(this.id);
 
         return fragmentView;
-    }
-
-    private void setBtShareToDevicesClick() {
-        FloatingActionButton btShare = fragmentView.findViewById(R.id.btShareToDevices);
-        btShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.shareTaskToAnotherDevice(id);
-            }
-        });
-    }
-
-    private void setBtShareClick() {
-        FloatingActionButton btShare = fragmentView.findViewById(R.id.btShareToDo);
-        final GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
-        btShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.shareTaskOnline(account.getEmail(), id);
-            }
-        });
-
-    }
-
-    private void setBtDeleteClick() {
-        FloatingActionButton btDelete = fragmentView.findViewById(R.id.btDeleteToDo);
-        btDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.deleteData(id);
-            }
-        });
-
     }
 
     @Override
@@ -144,5 +112,52 @@ public class DetailTaskFragment extends BaseFragment<DetailTaskActivity, DetailT
 
         Intent shareIntent = Intent.createChooser(sendIntent, null);
         startActivity(shareIntent);
+    }
+
+    private void bindMenuButtonListener() {
+        View.OnClickListener onclick = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopup(view);
+            }
+        };
+
+        activity.setMenuOnClick(onclick);
+    }
+
+    private void showPopup(View view) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+
+        popupMenu.getMenuInflater().inflate(R.menu.detailtask_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                menuAction(menuItem.getItemId());
+                return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+    private void menuAction(int viewId){
+        switch (viewId){
+            case R.id.menuDelete:
+                mPresenter.deleteData(id);
+                break;
+            case R.id.menuShareOnline:
+                final GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+                mPresenter.shareTaskOnline(account.getEmail(), id);
+                break;
+            case R.id.menuShareTo:
+                mPresenter.shareTaskToAnotherDevice(id);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
     }
 }

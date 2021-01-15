@@ -16,6 +16,7 @@ public interface DetailTaskContract {
         void showData(Task task);
         void setId(String id);
         void shareTaskToAnotherDevice(Task task);
+        void showToast(String message);
     }
 
     interface Presenter extends BasePresenter {

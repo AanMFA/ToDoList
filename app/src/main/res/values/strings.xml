@@ -7,4 +7,6 @@
     <string name="delete_task">Delete Task</string>
     <string name="share_online">Share Online</string>
     <string name="share_to">Share To...</string>
+    <string name="by">"By "</string>
+    <string name="welcome">"Welcome, Login To Continue"</string>
 </resources>

@@ -7,4 +7,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingLeft="@dimen/layout_padding"
     android:paddingRight="@dimen/layout_padding"
-    tools:listitem="@layout/simple_list_item_1"/>
+    tools:listitem="@layout/simple_list_item_1"
+    android:layout_marginHorizontal="@dimen/layout_padding"/>
